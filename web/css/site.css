@@ -1,0 +1,64 @@
+html{
+    font-family: 'Times New Roman', Times, serif;
+    background-color: #faf8fa;
+}
+
+#main_container{
+    margin: 0 auto;
+    max-width: 50em;
+}
+
+#content{
+    border: 1px solid gray;
+    padding: 1em;
+    border-radius: 0.3em;
+    box-shadow: 1px 1px 1px gray;
+    position: relative;
+    background-color: white;
+}
+
+#input_label{
+    position: absolute;
+    bottom: 1em;
+    left: 0.25em;
+    color: lightblue;
+}
+
+#lines{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#input{
+    cursor: text;
+    display: block;
+    width: 100%;
+    border: 0px solid lightgray;
+    border-bottom-width: 1px;
+}
+
+#lines,#input{
+    font-family: monaco;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#input:active, #input:hover, #input:focus{
+    border-color: lightblue;
+}
+
+.title{
+    color: gray;
+    font-weight: bold;
+    font-size: 32px;
+    border: 0px solid lightgray;
+    text-align: center;
+    margin: 0.5em auto 1em auto;
+    display: block;
+    outline: none;
+}
+
+.title:empty(){
+    border-bottom-width: 1px;
+}
