@@ -1,69 +1,75 @@
 var phonetic_map = {
     // 前元音
-    'i:': { dj: 'i:', kk: 'i',  mp3: 'mp3/i-.mp3' },
-    'I' : { dj: 'ɪ' , kk: 'ɪ',  mp3: 'mp3/I_.mp3' },
-    'e' : { dj: 'e',  kk: 'ɛ',  mp3: 'mp3/e.mp3'  },
-    'ae': { dj: 'æ',  kk: 'æ',  mp3: 'mp3/ae.mp3' },
+    'i:': { dj: 'i:', kk: 'i',  mp3: 'phonetics/i-.mp3' },
+    'I' : { dj: 'ɪ' , kk: 'ɪ',  mp3: 'phonetics/I_.mp3' },
+    'e' : { dj: 'e',  kk: 'ɛ',  mp3: 'phonetics/e.mp3'  },
+    'ae': { dj: 'æ',  kk: 'æ',  mp3: 'phonetics/ae.mp3' },
     // 中元音
-    'a' : { dj: 'ʌ',  kk: 'ʌ',  mp3: 'mp3/a.mp3'  },
-    'E:': { dj: 'ɜ:', kk: 'ɜ',  mp3: 'mp3/E_-.mp3'},
-    'E' : { dj: 'ə',  kk: 'ə',  mp3: 'mp3/E_.mp3' },
+    'a' : { dj: 'ʌ',  kk: 'ʌ',  mp3: 'phonetics/a.mp3'  },
+    'E:': { dj: 'ɜ:', kk: 'ɜ',  mp3: 'phonetics/E_-.mp3'},
+    'E' : { dj: 'ə',  kk: 'ə',  mp3: 'phonetics/E_.mp3' },
     // 后元音
-    'u:': { dj: 'u:', kk: 'u',  mp3: 'mp3/u-.mp3' },
-    'u' : { dj: 'ʊ',  kk: 'ʊ',  mp3: 'mp3/u.mp3'  },
-    'o:': { dj: 'ɔ:', kk: 'ɔ',  mp3: 'mp3/o-.mp3' },
-    'o' : { dj: 'ɒ',  kk: 'ɑ',  mp3: 'mp3/o.mp3'  },
-    'a:': { dj: 'ɑ:', kk: 'ɑ',  mp3: 'mp3/a-.mp3' },
+    'u:': { dj: 'u:', kk: 'u',  mp3: 'phonetics/u-.mp3' },
+    'u' : { dj: 'ʊ',  kk: 'ʊ',  mp3: 'phonetics/u.mp3'  },
+    'o:': { dj: 'ɔ:', kk: 'ɔ',  mp3: 'phonetics/o-.mp3' },
+    'o' : { dj: 'ɒ',  kk: 'ɑ',  mp3: 'phonetics/o.mp3'  },
+    'a:': { dj: 'ɑ:', kk: 'ɑ',  mp3: 'phonetics/a-.mp3' },
     // 开合双元音
-    'ei': { dj: 'eɪ', kk: 'e',  mp3: 'mp3/ei.mp3' },
-    'ai': { dj: 'aɪ', kk: 'aɪ', mp3: 'mp3/ai.mp3'},
-    'oi': { dj: 'ɔɪ', kk: 'ɔɪ', mp3: 'mp3/oi.mp3'},
-    'au': { dj: 'aʊ', kk: 'aʊ', mp3: 'mp3/au.mp3'},
-    'O' : { dj: 'əʊ', kk: 'o',  mp3: 'mp3/O_.mp3'},
+    'ei': { dj: 'eɪ', kk: 'e',  mp3: 'phonetics/ei.mp3' },
+    'ai': { dj: 'aɪ', kk: 'aɪ', mp3: 'phonetics/ai.mp3'},
+    'oi': { dj: 'ɔɪ', kk: 'ɔɪ', mp3: 'phonetics/oi.mp3'},
+    'au': { dj: 'aʊ', kk: 'aʊ', mp3: 'phonetics/au.mp3'},
+    'O' : { dj: 'əʊ', kk: 'o',  mp3: 'phonetics/O_.mp3'},
     // 集中双元音
-    'ir': { dj: 'ɪə', kk: 'ɪr', mp3: 'mp3/ir.mp3'},
-    'er': { dj: 'eə', kk: 'ɛr', mp3: 'mp3/er.mp3'},
-    'ur': { dj: 'ʊə', kk: 'ʊr', mp3: 'mp3/ur.mp3'},
+    'ir': { dj: 'ɪə', kk: 'ɪr', mp3: 'phonetics/ir.mp3'},
+    'er': { dj: 'eə', kk: 'ɛr', mp3: 'phonetics/er.mp3'},
+    'ur': { dj: 'ʊə', kk: 'ʊr', mp3: 'phonetics/ur.mp3'},
     // 爆破音
-    'p' : { dj: 'p' , kk: 'p' , mp3: 'mp3/p.mp3' },
-    'b' : { dj: 'b' , kk: 'b' , mp3: 'mp3/p.mp3' },
-    't' : { dj: 't' , kk: 't' , mp3: 'mp3/t.mp3' },
-    'd' : { dj: 'd' , kk: 'd' , mp3: 'mp3/d.mp3' },
-    'k' : { dj: 'k' , kk: 'k' , mp3: 'mp3/k.mp3' },
-    'g' : { dj: 'ɡ' , kk: 'ɡ' , mp3: 'mp3/g.mp3' },
+    'p' : { dj: 'p' , kk: 'p' , mp3: 'phonetics/p.mp3' },
+    'b' : { dj: 'b' , kk: 'b' , mp3: 'phonetics/p.mp3' },
+    't' : { dj: 't' , kk: 't' , mp3: 'phonetics/t.mp3' },
+    'd' : { dj: 'd' , kk: 'd' , mp3: 'phonetics/d.mp3' },
+    'k' : { dj: 'k' , kk: 'k' , mp3: 'phonetics/k.mp3' },
+    'g' : { dj: 'ɡ' , kk: 'ɡ' , mp3: 'phonetics/g.mp3' },
     // 摩擦音
-    'f' : { dj: 'f' , kk: 'f' , mp3: 'mp3/f.mp3' },
-    'v' : { dj: 'v' , kk: 'v' , mp3: 'mp3/v.mp3' },
-    's' : { dj: 's' , kk: 's' , mp3: 'mp3/s.mp3' },
-    'z' : { dj: 'z' , kk: 'z' , mp3: 'mp3/z.mp3' },
-    'ss': { dj: 'ʃ' , kk: 'ʃ' , mp3: 'mp3/ss.mp3'},
-    'zz': { dj: 'ʒ' , kk: 'ʒ' , mp3: 'mp3/zz.mp3'},
-    'S' : { dj: 'θ' , kk: 'θ' , mp3: 'mp3/S_.mp3'},
-    'Z' : { dj: 'ð' , kk: 'ð' , mp3: 'mp3/Z_.mp3'},
-    'h' : { dj: 'h' , kk: 'h' , mp3: 'mp3/h.mp3' },
+    'f' : { dj: 'f' , kk: 'f' , mp3: 'phonetics/f.mp3' },
+    'v' : { dj: 'v' , kk: 'v' , mp3: 'phonetics/v.mp3' },
+    's' : { dj: 's' , kk: 's' , mp3: 'phonetics/s.mp3' },
+    'z' : { dj: 'z' , kk: 'z' , mp3: 'phonetics/z.mp3' },
+    'ss': { dj: 'ʃ' , kk: 'ʃ' , mp3: 'phonetics/ss.mp3'},
+    'zz': { dj: 'ʒ' , kk: 'ʒ' , mp3: 'phonetics/zz.mp3'},
+    'S' : { dj: 'θ' , kk: 'θ' , mp3: 'phonetics/S_.mp3'},
+    'Z' : { dj: 'ð' , kk: 'ð' , mp3: 'phonetics/Z_.mp3'},
+    'h' : { dj: 'h' , kk: 'h' , mp3: 'phonetics/h.mp3' },
     // 破擦音
-    'q' : { dj: 'tʃ', kk: 'tʃ', mp3: 'mp3/q.mp3' },
-    'j' : { dj: 'dʒ', kk: 'dʒ', mp3: 'mp3/j.mp3' },
-    'tr': { dj: 'tr', kk: 'tr', mp3: 'mp3/tr.mp3'},
-    'dr': { dj: 'dr', kk: 'dr', mp3: 'mp3/dr.mp3'},
-    'ts': { dj: 'ts', kk: 'ts', mp3: 'mp3/ts.mp3'},
-    'dz': { dj: 'dz', kk: 'dz', mp3: 'mp3/dz.mp3'},
+    'q' : { dj: 'tʃ', kk: 'tʃ', mp3: 'phonetics/q.mp3' },
+    'j' : { dj: 'dʒ', kk: 'dʒ', mp3: 'phonetics/j.mp3' },
+    'tr': { dj: 'tr', kk: 'tr', mp3: 'phonetics/tr.mp3'},
+    'dr': { dj: 'dr', kk: 'dr', mp3: 'phonetics/dr.mp3'},
+    'ts': { dj: 'ts', kk: 'ts', mp3: 'phonetics/ts.mp3'},
+    'dz': { dj: 'dz', kk: 'dz', mp3: 'phonetics/dz.mp3'},
     // 鼻音
-    'm' : { dj: 'm' , kk: 'm' , mp3: 'mp3/m.mp3' },
-    'n' : { dj: 'n' , kk: 'n' , mp3: 'mp3/n.mp3' },
-    'ng': { dj: 'ŋ' , kk: 'ŋ' , mp3: 'mp3/ng.mp3'},
-    'l' : { dj: 'l' , kk: 'l' , mp3: 'mp3/l.mp3' },
-    'r' : { dj: 'r' , kk: 'r' , mp3: 'mp3/r.mp3' },
-    'w' : { dj: 'w' , kk: 'w' , mp3: 'mp3/w.mp3' },
-    'y' : { dj: 'j' , kk: 'j' , mp3: 'mp3/y.mp3' },
+    'm' : { dj: 'm' , kk: 'm' , mp3: 'phonetics/m.mp3' },
+    'n' : { dj: 'n' , kk: 'n' , mp3: 'phonetics/n.mp3' },
+    'ng': { dj: 'ŋ' , kk: 'ŋ' , mp3: 'phonetics/ng.mp3'},
+    'l' : { dj: 'l' , kk: 'l' , mp3: 'phonetics/l.mp3' },
+    'r' : { dj: 'r' , kk: 'r' , mp3: 'phonetics/r.mp3' },
+    'w' : { dj: 'w' , kk: 'w' , mp3: 'phonetics/w.mp3' },
+    'y' : { dj: 'j' , kk: 'j' , mp3: 'phonetics/y.mp3' },
 };
+
+var songs = [
+    'songs/far-away-from-home.mp3'
+]
 
 var phonetic_context = {
     last_key: null,
     last_key_appended: true,
     current_line: [],
     lines: [],
-    phonetic_lang: 'dj'
+    phonetic_lang: 'dj',
+    segments: [{begin: 0, stop: null}],
+    loop_seg: null
 }
 
 function update_current_line(){
@@ -122,15 +128,29 @@ function append_phonetic(phonetic_key, is_replace){
         phonetic_context.last_key = phonetic_key;
     }
     update_current_line();
-    play_single_phonetic(phonetic_key);
+    // play_single_phonetic(phonetic_key);
 }
 
 $('#input').keypress(function(e){
     if(e.key == 'Enter'){
         submit_line();
-    }else if(e.key == ' '){
+    } else if(e.key == ' '){
         append_normal_key(e.key);
-    }else if(phonetic_context.last_key != null){
+    } else if(e.key == '['){
+        begin_segment();
+    } else if(e.key == ']'){
+        stop_segment();
+    } else if(e.key == '=') {
+        switch_play_status();
+    } else if (e.key == '-') {
+        switch_loop();
+    } else if (e.key == '<') {
+        prev_loop();
+    } else if (e.key == '>') {
+        next_loop();
+    } else if (e.key == '\\') {
+        merge_segment();
+    } else if(phonetic_context.last_key != null){
         if(phonetic_map[phonetic_context.last_key + e.key]){
             append_phonetic(phonetic_context.last_key + e.key, true);
         }else{
@@ -142,9 +162,9 @@ $('#input').keypress(function(e){
                 phonetic_context.last_key_appended = false;
             }
         }
-    }else if(phonetic_map[e.key]){
+    } else if(phonetic_map[e.key]){
         append_phonetic(e.key, false);
-    }else{
+    } else{
         phonetic_context.last_key = e.key;
         phonetic_context.last_key_appended = false;
     }
@@ -154,3 +174,151 @@ $('#input').keypress(function(e){
         backspace();
     }
 })
+
+$(function(){
+    $('#songs_select').append(songs.map(function(song){return '<option key="' + song + '">' + song + '</option>'}).join('\n'));
+})
+
+$('#songs_select').change(function(e){
+    var song = e.target.value
+    start_song(song);
+})
+
+function start_song(song){
+    $('#title').val(song)
+    mp3_player.src = song
+    mp3_player.play()
+    update_segment_ui();
+}
+
+function begin_segment(){
+    var p = mp3_player.currentTime - 1;
+    var seg = find_segment(p);
+    var seg_index = phonetic_context.segments.indexOf(seg);
+    if (seg.stop && seg.stop <= p) {
+        phonetic_context.segments.splice(seg_index + 1, 0, {begin: p});
+    } else {
+        seg.begin = p;
+    }
+    update_segment_ui();
+}
+
+function stop_segment(){
+    var p = mp3_player.currentTime;
+    var seg = find_segment(p);
+    var seg_index = phonetic_context.segments.indexOf(seg);
+    if (seg.stop && seg.stop <= p) {
+        seg.stop = p;
+    } else {
+        phonetic_context.segments.splice(seg_index + 1, 0, {begin: p, stop: seg.stop});
+        seg.stop = p;
+    }
+    loop_seg(seg);
+    update_segment_ui();
+}
+
+function switch_play_status(){
+    if (mp3_player.paused) {
+        mp3_player.play();
+    } else {
+        mp3_player.pause();
+    }
+}
+
+function switch_loop(){
+    if (phonetic_context.loop_seg){
+        phonetic_context.loop_seg = null;
+        console.info("clear loop");
+    } else {
+        console.info('set loop');
+        loop_seg(find_segment(mp3_player.currentTime));
+    }
+    update_segment_ui();
+}
+
+function prev_loop(){
+    var seg = find_segment(mp3_player.currentTime);
+    var seg_index = phonetic_context.segments.indexOf(seg);
+    if (seg_index > 0) {
+        seg_index -= 1;
+    }
+    loop_seg(phonetic_context.segments[seg_index]);
+    update_segment_ui();
+}
+
+function next_loop(){
+    var seg = find_segment(mp3_player.currentTime);
+    var seg_index = phonetic_context.segments.indexOf(seg);
+    if (seg_index < phonetic_context.segments.length - 1) {
+        seg_index += 1;
+    }
+    loop_seg(phonetic_context.segments[seg_index]);
+    update_segment_ui();
+}
+
+function merge_segment(){
+    var seg = find_segment(mp3_player.currentTime);
+    var seg_index = phonetic_context.segments.indexOf(seg);
+    if (seg_index == phonetic_context.segments.length - 1) {
+        return;
+    }
+    seg.stop = phonetic_context.segments[seg_index+1].stop;
+    phonetic_context.segments.splice(seg_index+1, 1);
+    update_segment_ui();
+}
+
+function loop_seg(seg) {
+    phonetic_context.loop_seg = seg;
+    mp3_player.currentTime = seg.begin;
+    console.info("loop at: %s-%s", seg.begin, seg.stop);
+}
+
+function update_segment_ui(){
+    console.debug(phonetic_context.segments);
+    var len = mp3_player.duration;
+    len = len ? len : 1;
+    var ui_len = ol_segments.clientWidth;
+    var unit = ui_len / len;
+    var left = 0;
+    ol_segments.innerHTML = phonetic_context.segments.map(function(seg, i){
+        var stop = seg.stop;
+        if (!stop) {
+            if (i < phonetic_context.segments.length - 1) {
+                stop = phonetic_context.segments[i+1].begin;
+            } else {
+                stop = len;
+            }
+        }
+        var width = (stop - seg.begin) * unit - 2;
+        var classClause = '';
+        if (phonetic_context.loop_seg == seg) {
+            classClause = 'class="current"'
+        }
+        var elem = '<li ' + classClause + ' style="margin-left: ' + (seg.begin * unit - left) + 'px;width: ' + width + 'px"></li>';
+        left = stop * unit;
+        return elem;
+    }).join('');
+}
+
+$(mp3_player).bind('timeupdate', function(e){
+    if (phonetic_context.loop_seg) {
+        if (phonetic_context.loop_seg.stop && mp3_player.currentTime >= phonetic_context.loop_seg.stop) {
+            mp3_player.currentTime = phonetic_context.loop_seg.begin;
+        }
+    }
+    time_position.style.left = mp3_player.currentTime / mp3_player.duration * ol_segments.clientWidth
+})
+
+function find_segment(p) {
+    for (var i in phonetic_context.segments) {
+        if (phonetic_context.segments[i].begin > p) {
+            return phonetic_context.segments[i == 0 ? 0 : i - 1];
+        }
+    }
+    return phonetic_context.segments.last()
+}
+
+// utility
+Array.prototype.last = function() {
+    return this[this.length - 1];
+}

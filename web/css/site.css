@@ -54,6 +54,7 @@ html{
     font-size: 32px;
     border: 0px solid lightgray;
     text-align: center;
+    width: 90%;
     margin: 0.5em auto 1em auto;
     display: block;
     outline: none;
@@ -61,4 +62,42 @@ html{
 
 .title:empty(){
     border-bottom-width: 1px;
+}
+
+#ops_pannel>div{
+    margin: 0.5em 0;
+}
+
+#segments_panel{
+    position: relative;
+}
+
+#ol_segments{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: 1px solid gray;
+    background-color: #ecf0f1;
+}
+
+#ol_segments li{
+    list-style: none;
+    display: inline-block;
+    height: 20px;
+    background-color: #98d09a;
+    border: 0px solid #539422;
+    border-left-width: 1px;
+    border-right-width: 1px;
+}
+
+#ol_segments li.current{
+    background-color: #539422;
+}
+
+#time_position{
+    position: absolute;
+    width: 0;
+    border-left: 1px solid yellow;
+    height: 100%;
+    top: 0;
 }

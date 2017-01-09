@@ -7,6 +7,21 @@
     <body>
         <div id="main_container">
             <h1>My Phonetic</h1>
+            <div id="ops_pannel">
+                <div>
+                    <label for="songs_select">Select Song:</label>
+                    <select name="songs_select" id="songs_select">
+                        <option value="" selected="selected"></option>
+                    </select>
+                    <audio id="mp3_player" loop="loop"></audio>
+                </div>
+                <div id="segments_panel">
+                    <ol id="ol_segments">
+                        <li></li>
+                    </ol>
+                    <div id="time_position"></div>
+                </div>
+            </div>
             <div id="content">
                 <div>
                     <input type="text" id="title" class="title" placeholder="Input Title Here">
@@ -15,7 +30,6 @@
                     <label id="input_label" for="input">></label>
                 </div>
             </div>
-            <audio id="mp3_player"></audio>
         </div>
         <script src="js/jquery-3.1.1.js"></script>
         <script src="js/site.js"></script>
