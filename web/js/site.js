@@ -59,7 +59,8 @@ var phonetic_map = {
 };
 
 var songs = [
-    'songs/far-away-from-home.mp3'
+    'songs/far-away-from-home.mp3',
+    'songs/Yesterday Once More.mp3'
 ]
 
 var phonetic_context = {
@@ -140,14 +141,18 @@ $('#input').keypress(function(e){
         begin_segment();
     } else if(e.key == ']'){
         stop_segment();
-    } else if(e.key == '=') {
+    } else if(e.key == '{'){
+        prev_loop();
+    } else if(e.key == '}'){
+        next_loop();
+    } else if(e.key == '='){
         switch_play_status();
     } else if (e.key == '-') {
         switch_loop();
     } else if (e.key == '<') {
-        prev_loop();
+        current_time_backward();
     } else if (e.key == '>') {
-        next_loop();
+        current_time_forward();
     } else if (e.key == '\\') {
         merge_segment();
     } else if(phonetic_context.last_key != null){
@@ -256,6 +261,14 @@ function next_loop(){
     update_segment_ui();
 }
 
+function current_time_backward(){
+    mp3_player.currentTime -= 5;
+}
+
+function current_time_forward(){
+    mp3_player.currentTime += 5;
+}
+
 function merge_segment(){
     var seg = find_segment(mp3_player.currentTime);
     var seg_index = phonetic_context.segments.indexOf(seg);
@@ -290,6 +303,9 @@ function update_segment_ui(){
             }
         }
         var width = (stop - seg.begin) * unit - 2;
+        if (width < 0) {
+            return '';
+        }
         var classClause = '';
         if (phonetic_context.loop_seg == seg) {
             classClause = 'class="current"'
