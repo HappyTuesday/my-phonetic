@@ -71,7 +71,8 @@ var phonetic_context = {
     current_line: [],
     phonetic_lang: 'dj',
     segments: [{begin: 0, stop: null}],
-    loop_seg: null
+    loop_seg: null,
+    last_seg_index: 0
 }
 
 function get_line_ui_code(line) {
@@ -186,6 +187,15 @@ function move_to_next_line(append_new_line = false) {
     update_ui_with_current_line();
 }
 
+function move_to_line_number(line_number) {
+    for (var i = phonetic_context.lines_before.length; i < line_number; i++) {
+        move_to_next_line();
+    }
+    for (var i = line_number; i < phonetic_context.lines_before.length; i++) {
+        move_to_previous_line();
+    }
+}
+
 $('#input').keypress(function(e){
     if(e.key == 'Enter'){
         move_to_next_line(true);
@@ -258,8 +268,8 @@ function start_song(song){
 
 function begin_segment(){
     var p = mp3_player.currentTime - 1;
-    var seg = find_segment(p);
-    var seg_index = phonetic_context.segments.indexOf(seg);
+    var seg_index = find_segment_index(p, phonetic_context.last_seg_index);
+    var seg = phonetic_context.segments[seg_index];
     if (seg.stop && seg.stop <= p) {
         phonetic_context.segments.splice(seg_index + 1, 0, {begin: p});
     } else {
@@ -270,8 +280,8 @@ function begin_segment(){
 
 function stop_segment(){
     var p = mp3_player.currentTime;
-    var seg = find_segment(p);
-    var seg_index = phonetic_context.segments.indexOf(seg);
+    var seg_index = find_segment_index(p, phonetic_context.last_seg_index);
+    var seg = phonetic_context.segments[seg_index];
     if (seg.stop && seg.stop <= p) {
         seg.stop = p;
     } else {
@@ -296,26 +306,31 @@ function switch_loop(){
         console.info("clear loop");
     } else {
         console.info('set loop');
-        loop_seg(find_segment(mp3_player.currentTime));
+        loop_seg(find_segment(mp3_player.currentTime, phonetic_context.last_seg_index));
     }
     update_segment_ui();
 }
 
+
 function prev_loop(){
-    var seg = find_segment(mp3_player.currentTime);
-    var seg_index = phonetic_context.segments.indexOf(seg);
+    var p = mp3_player.currentTime;
+    var seg_index = find_segment_index(p, phonetic_context.last_seg_index);
+    var seg = phonetic_context.segments[seg_index];
     if (seg_index > 0) {
         seg_index -= 1;
+        phonetic_context.last_seg_index = seg_index;
     }
     loop_seg(phonetic_context.segments[seg_index]);
     update_segment_ui();
 }
 
 function next_loop(){
-    var seg = find_segment(mp3_player.currentTime);
-    var seg_index = phonetic_context.segments.indexOf(seg);
+    var p = mp3_player.currentTime;
+    var seg_index = find_segment_index(p, phonetic_context.last_seg_index);
+    var seg = phonetic_context.segments[seg_index];
     if (seg_index < phonetic_context.segments.length - 1) {
         seg_index += 1;
+        phonetic_context.last_seg_index = seg_index;
     }
     loop_seg(phonetic_context.segments[seg_index]);
     update_segment_ui();
@@ -330,8 +345,9 @@ function current_time_forward(){
 }
 
 function merge_segment(){
-    var seg = find_segment(mp3_player.currentTime);
-    var seg_index = phonetic_context.segments.indexOf(seg);
+    var p = mp3_player.currentTime;
+    var seg_index = find_segment_index(p, phonetic_context.last_seg_index);
+    var seg = phonetic_context.segments[seg_index];
     if (seg_index == phonetic_context.segments.length - 1) {
         return;
     }
@@ -382,16 +398,29 @@ $(mp3_player).bind('timeupdate', function(e){
             mp3_player.currentTime = phonetic_context.loop_seg.begin;
         }
     }
-    time_position.style.left = mp3_player.currentTime / mp3_player.duration * ol_segments.clientWidth
+
+    time_position.style.left = mp3_player.currentTime / mp3_player.duration * ol_segments.clientWidth;
+    
+    phonetic_context.last_seg_index = find_segment_index(mp3_player.currentTime, phonetic_context.last_seg_index);
+    move_to_line_number(phonetic_context.last_seg_index);
 })
 
-function find_segment(p) {
-    for (var i in phonetic_context.segments) {
+function find_segment(p, disp = 0) {
+    return phonetic_context.segments[find_segment_index(p, disp)]
+}
+
+function find_segment_index(p, disp = 0) {
+    for (var i = disp; i < phonetic_context.segments.length; i++) {
         if (phonetic_context.segments[i].begin > p) {
-            return phonetic_context.segments[i == 0 ? 0 : i - 1];
+            return i == 0 ? 0 : i - 1;
         }
     }
-    return phonetic_context.segments.last()
+    for (var i = 0; i < disp; i++) {
+        if (phonetic_context.segments[i].begin > p) {
+            return i == 0 ? 0 : i - 1;
+        }
+    }
+    return phonetic_context.segments.length - 1
 }
 
 // utility
