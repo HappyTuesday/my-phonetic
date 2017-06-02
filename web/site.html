@@ -23,11 +23,14 @@
                 </div>
             </div>
             <div id="content">
-                <div>
-                    <input type="text" id="title" class="title" placeholder="Input Title Here">
-                    <ul id="lines"></ul>
-                    <input id="input" readonly="readonly" placeholder="Input Phonetic Here">
-                    <label id="input_label" for="input">></label>
+                <input type="text" id="title" class="title" placeholder="Input Title Here">
+                <div id="body_wrapper">
+                    <ul id="lines_before" class="lines"></ul>
+                    <div id="current_line_wrapper">
+                        <input id="input" readonly="readonly" placeholder="Input Phonetic Here">
+                        <label id="input_label" for="input">></label>
+                    </div>
+                    <ul id="lines_after" class="lines"></ul>
                 </div>
             </div>
         </div>

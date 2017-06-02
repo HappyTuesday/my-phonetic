@@ -66,19 +66,36 @@ var songs = [
 var phonetic_context = {
     last_key: null,
     last_key_appended: true,
+    lines_before: [],
+    lines_after: [],
     current_line: [],
-    lines: [],
     phonetic_lang: 'dj',
     segments: [{begin: 0, stop: null}],
     loop_seg: null
 }
 
-function update_current_line(){
+function get_line_ui_code(line) {
+    return '<li>' + line.join('') + '</li>';
+}
+
+function update_ui_with_current_line(){
     $('#input').val(phonetic_context.current_line.join(''));
 }
 
-function append_current_line(){
-    $('#lines').append('<li>' + phonetic_context.current_line.join('') + '</li>');
+function ui_append_line_to_lines_before(line) {
+    $('#lines_before').append(get_line_ui_code(line));
+}
+
+function ui_remove_line_from_lines_before() {
+    $('#lines_before>li:last').remove();
+}
+
+function ui_insert_line_to_lines_after(line) {
+    $('#lines_after').prepend(get_line_ui_code(line));
+}
+
+function ui_remove_line_from_lines_after() {
+    $('#lines_after>li:first').remove();
 }
 
 function play_single_phonetic(phonetic_key){
@@ -92,31 +109,13 @@ function commit_last_key(){
     }
     phonetic_context.last_key = null;
     phonetic_context.last_key_appended = true;
-    update_current_line();
-}
-
-function submit_line(){
-    commit_last_key();
-    phonetic_context.lines += phonetic_context.current_line;
-    append_current_line();
-    phonetic_context.current_line = [];
-    update_current_line();
+    update_ui_with_current_line();
 }
 
 function append_normal_key(key){
     commit_last_key();
     phonetic_context.current_line.push(key);
-    update_current_line();
-}
-
-function backspace(){
-    if(phonetic_context.last_key_appended){
-        phonetic_context.current_line.pop();
-        update_current_line();
-    }else{
-        phonetic_context.last_key = null;
-        phonetic_context.last_key_appended = true;
-    }
+    update_ui_with_current_line();
 }
 
 function append_phonetic(phonetic_key, is_replace){
@@ -128,13 +127,68 @@ function append_phonetic(phonetic_key, is_replace){
     }else{
         phonetic_context.last_key = phonetic_key;
     }
-    update_current_line();
+    update_ui_with_current_line();
     // play_single_phonetic(phonetic_key);
+}
+
+function backspace(){
+    if(phonetic_context.last_key_appended){
+        if (phonetic_context.current_line.length > 0) {
+            phonetic_context.current_line.pop();
+            update_ui_with_current_line();
+        }
+    }else{
+        phonetic_context.last_key = null;
+        phonetic_context.last_key_appended = true;
+    }
+}
+
+function remove_current_line() {
+    commit_last_key();
+
+    if (phonetic_context.lines_after.length > 0) {
+        phonetic_context.current_line = phonetic_context.lines_after.shift();
+        ui_remove_line_from_lines_after();
+    }
+
+    update_ui_with_current_line();
+}
+
+function move_to_previous_line() {
+    if (phonetic_context.lines_before.length == 0) return;
+
+    commit_last_key();
+
+    phonetic_context.lines_after.unshift(phonetic_context.current_line);
+    ui_insert_line_to_lines_after(phonetic_context.current_line);
+    
+    phonetic_context.current_line = phonetic_context.lines_before.pop();
+    ui_remove_line_from_lines_before();
+
+    update_ui_with_current_line();
+}
+
+function move_to_next_line(append_new_line = false) {
+    commit_last_key();
+
+    if (append_new_line || phonetic_context.lines_after.length > 0) {
+        phonetic_context.lines_before.push(phonetic_context.current_line);
+        ui_append_line_to_lines_before(phonetic_context.current_line);
+
+        if (append_new_line) {
+            phonetic_context.current_line = [];
+        } else {
+            phonetic_context.current_line = phonetic_context.lines_after.shift();
+            ui_remove_line_from_lines_after();
+        }
+    }
+
+    update_ui_with_current_line();
 }
 
 $('#input').keypress(function(e){
     if(e.key == 'Enter'){
-        submit_line();
+        move_to_next_line(true);
     } else if(e.key == ' '){
         append_normal_key(e.key);
     } else if(e.key == '['){
@@ -175,10 +229,16 @@ $('#input').keypress(function(e){
     }
     return false;
 }).keydown(function(e){
-    if(e.key == 'Backspace'){
+    if(e.key == 'Backspace') {
         backspace();
+    } else if (e.key == 'ArrowUp') {
+        move_to_previous_line();
+    } else if (e.key == 'ArrowDown') {
+        move_to_next_line(false);
+    } else if (e.key == 'Delete') {
+        remove_current_line();
     }
-})
+});
 
 $(function(){
     $('#songs_select').append(songs.map(function(song){return '<option key="' + song + '">' + song + '</option>'}).join('\n'));
